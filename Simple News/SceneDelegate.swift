@@ -17,6 +17,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
+        let newsViewController = NewsListRouter.createModule()
+        let bookmarkViewController = BookmarkRouter.createModule()
+        
+        let navigationController = UINavigationController()
+        navigationController.viewControllers = [newsViewController]
+        
+        let bookmarkNavigationController = UINavigationController()
+        bookmarkNavigationController.title = "Bookmark"
+        bookmarkNavigationController.navigationBar.prefersLargeTitles = true
+        bookmarkNavigationController.viewControllers = [bookmarkViewController]
+        
+        let tabViewController = UITabBarController()
+        tabViewController.viewControllers = [navigationController, bookmarkNavigationController]
+        
+        
+        self.window?.rootViewController = tabViewController
+        window?.makeKeyAndVisible()
+
+        
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 
